@@ -12,16 +12,27 @@ class ProductController {
   static async getProductByID(req: Request, res: Response) {
     const { id } = req.params
     const product = await ProductModel.getProductByID(id)
-    const comments = await commentProductModel.getCommentPostByID(id)
-    res.status(200).json({...product, comments})
+    res.status(200).json(product)
+  }
+
+  static async getProductsFeatured(req: Request, res: Response) {
+    const product = await ProductModel.getProductsFeatured()
+    res.status(200).json(product)
   }
 
   static async postNewCommentProduct(req: Request, res: Response) {
     const { id } = req.params
-    const { author, comment } = req.body
-    const newComment = new commentProductModel(id, author, comment)
+    const { comment } = req.body
+    const { decoded } = res.locals
+    const newComment = new commentProductModel(id, decoded.username, comment)
     newComment.postComment()
     res.status(200).json(newComment)
+  }
+
+   static async getCommentsByProductID(req: Request, res: Response) {
+    const { id } = req.params
+    const comments = await commentProductModel.getCommentPostByID(id)
+    res.status(200).json(comments)
   }
 
 }

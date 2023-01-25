@@ -11,4 +11,12 @@ interface Product {
   color: string
   illustration: boolean
   tissue: string
+  category: "featured" | "commum"
+  src: string
+}
+
+interface UserDatabase {
+  username: string
+  email: string
+  password: string
 }

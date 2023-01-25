@@ -27,6 +27,12 @@ class ProductModel {
     const Product = await Products.findOne<WithId<Product>>({_id: new ObjectId(id)})
     return Product as WithId<Product>
   }
+
+  static async getProductsFeatured() {
+    const Product = await Products.find<WithId<Product[]>>({category: 'featured'}).toArray()
+    return Product
+
+  }
 }
 
 export default ProductModel
