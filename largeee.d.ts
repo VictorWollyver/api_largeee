@@ -5,6 +5,13 @@ interface Comment {
   comment: string
 }
 
+interface ProductToBuy {
+  name: string
+  price: number
+  amount: number
+}
+
+
 interface Product {
   name: string
   price: number

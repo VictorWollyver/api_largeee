@@ -15,7 +15,7 @@ class UserMiddlewares {
   static verifyIfTokenIsValid(req: Request, res: Response, next: NextFunction) {
     const { tokenFormated } = res.locals
     jwt.verify(tokenFormated, process.env.JWT_SECRET as string, (err: any , decoded: any) => {
-      if(err) return res.status(401).json({auth: false, message: err.message})
+      if(err) return res.status(401).json({auth: false, message: 'create an account to add to cart'})
       res.locals.decoded = decoded
       next()
     })
