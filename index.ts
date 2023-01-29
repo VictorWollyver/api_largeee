@@ -1,8 +1,8 @@
 import express from "express";
 import { config } from "dotenv";
-import User from "./routes/user.routes";
-import Product from "./routes/product.routes";
-import Payments from "./payments/server";
+import User from "./src/routes/user.routes";
+import Product from "./src/routes/product.routes";
+import Payments from "./src/payments/server";
 import cors from 'cors'
 
 config()
