@@ -53,13 +53,27 @@ class UserController {
     const { decoded } = res.locals
     const productUserAlreadyExists = await cartUserModel.verifyIfUserCartAlreadyExists(decoded.user_id, product_id)
 
-    if(productUserAlreadyExists.length) {
+    if(productUserAlreadyExists) {
       cartUserModel.updateAmountProduct(decoded.user_id, product_id)
     } else {
       const product = await ProductModel.getProductByID(product_id)
       cartUserModel.addProductCart(product, decoded.user_id)
     }
     res.status(201).json({message: 'Adicionado com Sucesso'})
+  }
+
+  static async removeProductCart(req: Request, res: Response) {
+    const { product_id } = req.params
+    const { decoded } = res.locals
+    const productUserAlreadyExists = await cartUserModel.verifyIfUserCartAlreadyExists(decoded.user_id, product_id)
+
+    if(productUserAlreadyExists && productUserAlreadyExists.amount > 1) {
+      cartUserModel.removeOneAmountProduct(decoded.user_id, product_id)
+      res.status(200).json({message: 'Removido com Sucesso'})
+    } else if(productUserAlreadyExists && productUserAlreadyExists.amount === 1) {
+      cartUserModel.deleteProductCart(decoded.user_id, product_id)
+      res.status(200).json({message: 'Deletado com Sucesso'})
+    }
   }
 }
 

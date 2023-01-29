@@ -12,6 +12,8 @@ User.get('/', UserMiddlewares.verifyIfTokenExists, UserMiddlewares.verifyIfToken
 
 User.post('/addProductCart/:product_id', UserMiddlewares.verifyIfTokenExists, UserMiddlewares.verifyIfTokenIsValid, UserController.addProductCart)
 
+User.delete('/removeProductCart/:product_id', UserMiddlewares.verifyIfTokenExists, UserMiddlewares.verifyIfTokenIsValid, UserController.removeProductCart)
+
 User.get('/cart', UserMiddlewares.verifyIfTokenExists, UserMiddlewares.verifyIfTokenIsValid, UserController.getCart)
 
 export default User

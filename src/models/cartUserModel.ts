@@ -16,13 +16,23 @@ class cartUserModel {
   }
 
   static async verifyIfUserCartAlreadyExists(user_id: string, product_id: string){
-    const alreadyExists = await cart.find({ user_id: user_id, product_id: new ObjectId(product_id) }).toArray() 
+    const alreadyExists = await cart.findOne<ProductOnCart>({ user_id: user_id, product_id: new ObjectId(product_id) })
     return alreadyExists
   }
 
   static async updateAmountProduct(user_id: string, product_id: string){
     const update = await cart.updateOne({ user_id: user_id,  product_id: new ObjectId(product_id)}, { $inc: {amount: 1 }})    
     return update
+  }
+
+  static async removeOneAmountProduct(user_id: string, product_id: string){
+    const update = await cart.updateOne({ user_id: user_id,  product_id: new ObjectId(product_id)}, { $inc: {amount: -1 }})    
+    return update
+  }
+
+  static async deleteProductCart(user_id: string, product_id: string){
+    const deleted = await cart.deleteOne({ user_id: user_id,  product_id: new ObjectId(product_id)})    
+    return deleted
   }
 
 }
