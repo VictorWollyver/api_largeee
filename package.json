@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
+    "start": "node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn ./src/index.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn ./src/index.ts"
   },
   "keywords": [],
   "author": "",
