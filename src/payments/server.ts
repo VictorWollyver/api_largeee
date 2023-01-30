@@ -4,7 +4,7 @@ import express from "express"
 
 const Payments = express.Router()
 
-const domain = 'http://localhost:3000'
+const domain = 'https://largeee.vercel.app/'
 
 config()
 
