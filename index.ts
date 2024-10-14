@@ -6,7 +6,7 @@ import Payments from "./src/payments/server";
 import cors from 'cors'
 
 config()
-const port = process.env.PORT || 3001
+const port = process.env.PORT
 
 const app = express();
 
